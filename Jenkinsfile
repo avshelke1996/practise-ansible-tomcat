@@ -8,6 +8,9 @@ pipeline{
         stage('clean'){
             steps{
                 echo 'clean'
+                sh 'sudo docker network rm avi_network || true'
+                su 'sudo docker kill s1_con || true'
+                su 'sudo docker rm s1_con || true'
             }
         }
         stage('build'){

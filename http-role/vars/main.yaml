@@ -1,0 +1,4 @@
+pkg: docker
+network: avi_network
+git_repo: https://github.com/avshelke1996/practise-ansible-tomcat.git
+copy_path: /home/avi/giiit/sample.war

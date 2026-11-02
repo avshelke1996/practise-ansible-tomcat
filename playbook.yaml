@@ -24,4 +24,4 @@
      action: community.docker.docker_container name=s1_con image=tomcat network_mode=avi_network ports=8080:8080 state=started
 
    - name: copying to conatiner
-     action: community.docker.docker_container_copy_into container=s1_con path=/home/avi/giiit/sample.war container_path=/usr/local/tomcat/webapps
+     action: community.docker.docker_container_copy_into container=s1_con path=/home/avi/giiit/sample.war container_path=/usr/local/tomcat/webapps/sample.war

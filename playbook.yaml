@@ -19,21 +19,15 @@
 
    - name: docker start
      action: service name="{{pkg}}" state=started
-     notify:
-       -  creating_network
-       -  clonning_git_repo
-       -  creating_container
-       -  copying_to_conatiner
-     
-  handlers:
-   - name: creating_network
+
+   - name: creating network
      action: community.docker.docker_network name="{{network}}" driver=bridge state=present
 
-   - name: clonning_git_repo
+   - name: creating git repo
      action: ansible.builtin.git repo="{{git_repo}}" dest=/home/avi/giiit
 
-   - name: creating_container
+   - name: creating container
      action: community.docker.docker_container name=s1_con image=tomcat network_mode="{{network}}" ports=8080:8080 state=started
 
-   - name: copying_to_conatiner
+   - name: copying to conatiner
      action: community.docker.docker_container_copy_into container=s1_con path="{{copy_path}}" container_path=/usr/local/tomcat/webapps/sample.war

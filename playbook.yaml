@@ -5,7 +5,7 @@
   user: avi
   become: yes
   connection: ssh
-  gather_fact: yes
+  gather_facts: yes
 
   tasks:
    - name: installing httpd 

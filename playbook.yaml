@@ -1,0 +1,15 @@
+---
+
+#hosts
+- hosts: devlinux
+  user: avi
+  become: yes
+  connection: ssh
+  gather_fact: yes
+
+  tasks:
+   - name: installing httpd 
+     action: dnf name=httpd state=present
+
+   - name: starting server
+     action: service name=httpd state=started

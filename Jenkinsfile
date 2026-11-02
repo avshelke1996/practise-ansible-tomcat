@@ -13,6 +13,9 @@ pipeline{
         stage('build'){
             steps{
                 echo 'build'
+                echo 'pwd'
+                echo 'whoami'
+                sh 'ansible-playbook playbook.yaml'
             }
         }
         stage('deploy'){

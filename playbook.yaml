@@ -11,6 +11,9 @@
    - name: installing docker 
      action: dnf name=docker state=present
 
+   - name: docker start
+     action: service name=docker state=started
+
    - name: creating network
      action: community.docker.docker_network name=avi_network driver=bridge state=present
 

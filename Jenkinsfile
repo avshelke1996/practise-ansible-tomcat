@@ -8,9 +8,10 @@ pipeline{
         stage('clean'){
             steps{
                 echo 'clean'
-                sh 'sudo docker network rm avi_network || true'
-                su 'sudo docker kill s1_con || true'
-                su 'sudo docker rm s1_con || true'
+                sh '''
+                    ansible devlinux -b -m shell -a "docker rm -f s1_con || true"
+                    ansible devlinux -b -m community.docker.docker_network -a "name=avi_network state=absent"
+                '''
             }
         }
         stage('build'){

@@ -8,8 +8,17 @@
   gather_facts: yes
 
   tasks:
-   - name: installing httpd 
-     action: dnf name=httpd state=present
+   - name: installing docker 
+     action: dnf name=docker state=present
 
-   - name: starting server
-     action: service name=httpd state=started
+   - name: creating network
+     action: community.docker.docker_network name=avi_network driver=bridge state=present
+
+   - name: creating git repo
+     action: ansible.builtin.git repo=https://github.com/avshelke1996/practise-ansible-tomcat.git dest=/home/avi/giiit
+
+   - name: creating container
+     action: community.docker.docker_container name=s1_con image=tomcat network_mode=avi_network ports=8080:8080 state=started
+
+   - name: copying to conatiner
+     action: community.docker.docker_container_copy_into container=s1_con path=/home/avi/giiit/sample.war container_path=/usr/local/tomcat/webapps
